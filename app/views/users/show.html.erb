@@ -1,0 +1,30 @@
+
+
+<h2><%=@user.first_name+" "+@user.last_name%></h2>
+
+<table class="table .table-condensed">
+	<tr>
+      <th>Email:</th>
+      <td><%=@user.email%></td>
+    </tr>
+    <tr>
+      <th>First Name:</th>
+      <td><%=@user.first_name%></td>
+    </tr>
+    <tr>
+      <th>Last Name:</th>
+      <td><%=@user.last_name%></td>
+    </tr>
+    <tr>
+      <th>Puntuation:</th>
+      <td><%=@user.points%> points</td>
+    </tr>
+    <tr>
+      <th>Joined:</th>
+      <td><%=distance_of_time_in_words(@user.created_at,Time.now)%> ago.</td>
+    </tr>
+
+</table>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

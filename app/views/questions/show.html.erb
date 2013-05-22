@@ -1,0 +1,33 @@
+
+<tr>
+	<td>
+		<h5><%=@question.ask_for%></h5>
+		<div class="well">
+			<%= @question.description%>
+		</div>
+
+	<td>
+	<br/>
+</tr>
+<tr>
+	<td>Votes:<%= @question.votes%></td><br/>
+</tr>
+<tr>
+    <td>Asked by <%= link_to @question.user.email, user_path(@question.user_id)%></td>
+    <td>at <%= @question.created_at%></td>
+</tr>
+
+<br/>
+<%unless @question.user_id == current_user.id%>
+<%= link_to raw('<i class="icon-thumbs-up"></i>'), like_question_path(@question), :class => "btn", :method => :put%>
+<%= link_to raw('<i class="icon-thumbs-down"></i>'), unlike_question_path(@question), :class => "btn", :method => :put%>
+<br/>
+<%=link_to "Answer this question",new_question_answer_path(@question) ,:class => "btn btn-primary"%>
+<%end%>
+<%@answers.each do |ans|%>
+	<tr>
+		<td><%=ans.contents%></td><br\>
+		<td>Votes:<%=ans.votes%></td>
+	</tr>
+<%end%>
+<%= link_to 'Back', questions_path %>

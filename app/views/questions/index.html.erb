@@ -1,0 +1,37 @@
+<h1>Questions</h1>
+<br/>
+<%unless @questions.empty?%>
+<table class="table table-bordered table-hover table-striped table-condensed">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Is Asking for</th>
+      <th>Published at</th>
+      <%if current_user.admin%>
+      <th>Delete</th>
+      <%end%>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= link_to question.user.email, user_path(question.user)%></td>
+        <td><%= link_to truncate(question.ask_for,:length=>40), question %></td>
+        <td><%=question.created_at%></td>
+        <%if current_user.admin%>
+        <td><%= link_to raw('<i class="icon-trash"></i>'), question, :class=>"btn", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%else%>
+    No questions yet.
+<%end%>
+
+<br/>
+
+<div>
+<%= link_to 'Make a Question!', new_question_path, :class =>"btn btn-primary" %>
+<div/>

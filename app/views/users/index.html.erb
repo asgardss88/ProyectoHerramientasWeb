@@ -1,0 +1,23 @@
+<h1>Registered Users</h1>
+<br/><br/>
+<table class="table table-bordered table-hover table-striped">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.email, user %></td>
+        <td><%= link_to raw('<i class="icon-pencil"></i>'), edit_user_registration_path(user), :class => "btn" %></td>
+        <td><%= link_to raw('<i class="icon-trash"></i>'), user, :class => "btn", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

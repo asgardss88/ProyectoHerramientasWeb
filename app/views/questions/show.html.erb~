@@ -1,0 +1,7 @@
+<p id="notice"><%= notice %></p>
+<tr>
+	<td><%=if @question.contents%></td>
+        <td><%= @question.votes%></td>
+        <td><%= link_to 'User', @question.user_id%></td>
+</tr>
+<%= link_to 'Back', questions_path %>
