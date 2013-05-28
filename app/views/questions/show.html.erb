@@ -1,33 +1,108 @@
+<div class="row-fluid">
+	<div class="span4"></div>
+	<div class = "span4">
+	
+		<tr>
+			<td>
+				<h5><%=@question.ask_for%></h5>
+				<div class="well">
+					<%= @question.description%>
+				</div>
 
-<tr>
-	<td>
-		<h5><%=@question.ask_for%></h5>
-		<div class="well">
-			<%= @question.description%>
+			<td>
+		</tr>
+		<tr>
+			<td>Votes:<%= @question.votes%></td><br/>
+		</tr>
+		<tr>
+		    <td>Asked by <%= link_to @question.user.email, user_path(@question.user_id)%></td>
+		    <td>at <%= @question.created_at%></td>
+		</tr>
+		<tr>
+			<td>Poits for a correct answer:<%=@question.bonus+1%></td>
+		</tr>
+		<br/>
+
+
+		<div class="accordion" id="accordion1">
+			<div class="accordion-group">
+			    <div class="accordion-heading">
+			      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse0">
+			      	Comments
+			      </a>
+			    </div>
+			    <div id="collapse0" class="accordion-body collapse">
+			    <div class="accordion-inner">
+					<div class="accordion" id="accordion2">
+					<%contador=1%>
+					<%@comments.each do |com|%>
+					  <div class="accordion-group">
+					    <div class="accordion-heading">
+					      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#<%="collapse"+contador.to_s%>">
+					       Comment by: <%=link_to com.user.email, user_path(com.user_id) %> at <%=com.created_at%> 
+					      </a>
+					    </div>
+					    <div id="<%="collapse"+contador.to_s%>" class="accordion-body collapse">
+					      <div class="accordion-inner">
+					        <%=com.content%>
+					      </div>
+					    </div>
+					  </div>
+					 	 <%contador+=1%>
+					  <%end%>
+					</div>
+				</div>
+			</div>
+		</div>
 		</div>
 
-	<td>
-	<br/>
-</tr>
-<tr>
-	<td>Votes:<%= @question.votes%></td><br/>
-</tr>
-<tr>
-    <td>Asked by <%= link_to @question.user.email, user_path(@question.user_id)%></td>
-    <td>at <%= @question.created_at%></td>
-</tr>
+		<%=link_to "Comment this question",new_question_question_comment_path(@question) ,:class => "btn btn-primary"%>
+	
 
-<br/>
-<%unless @question.user_id == current_user.id%>
-<%= link_to raw('<i class="icon-thumbs-up"></i>'), like_question_path(@question), :class => "btn", :method => :put%>
-<%= link_to raw('<i class="icon-thumbs-down"></i>'), unlike_question_path(@question), :class => "btn", :method => :put%>
-<br/>
-<%=link_to "Answer this question",new_question_answer_path(@question) ,:class => "btn btn-primary"%>
-<%end%>
-<%@answers.each do |ans|%>
-	<tr>
-		<td><%=ans.contents%></td><br\>
-		<td>Votes:<%=ans.votes%></td>
-	</tr>
+<%if can?(:create, Answer) and can?(:read, Answer) and can?(:vote, Question)%>
+	<%unless @question.user_id == current_user.id%>
+		<%= link_to raw('<i class="icon-thumbs-up"></i>'), like_question_path(@question), :class => "btn", :method => :put%>
+		<%= link_to raw('<i class="icon-thumbs-down"></i>'), unlike_question_path(@question), :class => "btn", :method => :put%>
+		<br/>
+		<%=link_to "Answer this question",new_question_answer_path(@question) ,:class => "btn btn-primary"%>
+	<%end%>
+	<%if @answers.empty?%>
+		No answers yet.
+	<%end%>
+	</div>
+</div>
+<div class="row">
+		<%@answers.each do |ans|%>
+
+			<%clase=ans.state ? "success": "warning" %>
+			<table class="table table-condensed">
+				<tr class=<%=clase%>>
+					<td>Posted By</td>
+					<td><%= link_to ans.user.email ,user_path(ans.user_id)%></td>
+					<td>Votes</td>
+					<td><%=ans.votes%></td>
+					<td>
+						<%if @question.user_id == current_user.id and ans.state==false%>
+						<%=link_to raw('<i class="icon-ok"></i>'), validate_question_answer_path(@question,ans), :class =>"btn",:method => :put %>
+						<%end%>
+					</td>
+				</tr>
+				<tr class=<%=clase%>>
+					<td><%=ans.content%></td>
+					<td></td>
+					<td><%= link_to(raw('<i class="icon-thumbs-up"></i>'), like_question_answer_path(@question,ans), :class => "btn", :method => :put) unless ans.user_id == current_user.id %></td>
+					<td></td>
+				</tr>
+				<tr class=<%=clase%>>
+					<td>At  <%=ans.created_at%></td>
+					<td></td>
+					<td><%= link_to(raw('<i class="icon-thumbs-down"></i>'), unlike_question_answer_path(@question,ans), :class => "btn", :method => :put) unless ans.user_id == current_user.id%>
+					</td>
+					<td></td>
+				</tr>
+			</table>
+		<%end%>
+</div>
 <%end%>
 <%= link_to 'Back', questions_path %>
+

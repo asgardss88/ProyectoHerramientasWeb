@@ -5,7 +5,7 @@ class Ability
     user ||= User.new
 
     if user.admin
-        can [:list,:update,:destroy], User
+        can [:list,:read,:update,:destroy], User
         can [:list,:read, :destroy], Question
         can [:read,:destroy], AnswerComment 
         can [:read,:destroy], QuestionComment 

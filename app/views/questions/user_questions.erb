@@ -1,0 +1,29 @@
+<h1>Questions</h1>
+<br/>
+<%unless @questions.empty?%>
+<table class="table table-bordered table-hover table-striped table-condensed">
+  <thead>
+    <tr>
+      <th>I'm Asking for</th>
+      <th>Published at</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= link_to truncate(question.ask_for,:length=>40), question %></td>
+        <td><%=question.created_at%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%else%>
+    No questions yet.
+<%end%>
+
+<br/>
+
+<div>
+<%= link_to 'Make a Question!', new_question_path, :class =>"btn btn-primary" %>
+<div/>

@@ -1,43 +1,44 @@
-                             Prefix Verb   URI Pattern                                                              Controller#Action
-               makecomment_question POST   /questions/:id/makecomment(.:format)                                     questions#makecomment
-                      like_question PUT    /questions/:id/like(.:format)                                            questions#like
-                    unlike_question PUT    /questions/:id/unlike(.:format)                                          questions#unlike
-        makecomment_question_answer POST   /questions/:question_id/answers/:id/makecomment(.:format)                answers#makecomment
-               like_question_answer PUT    /questions/:question_id/answers/:id/like(.:format)                       answers#like
-             unlike_question_answer PUT    /questions/:question_id/answers/:id/unlike(.:format)                     answers#unlike
-           validate_question_answer PUT    /questions/:question_id/answers/:id/validate(.:format)                   answers#validate
-    question_answer_answer_comments POST   /questions/:question_id/answers/:answer_id/answer_comments(.:format)     answer_comments#create
-new_question_answer_answer_comments GET    /questions/:question_id/answers/:answer_id/answer_comments/new(.:format) answer_comments#new
-                   question_answers POST   /questions/:question_id/answers(.:format)                                answers#create
-                new_question_answer GET    /questions/:question_id/answers/new(.:format)                            answers#new
-         question_question_commnets POST   /questions/:question_id/question_commnets(.:format)                      question_commnets#create
-      new_question_question_commnet GET    /questions/:question_id/question_commnets/new(.:format)                  question_commnets#new
-                          questions GET    /questions(.:format)                                                     questions#index
-                                    POST   /questions(.:format)                                                     questions#create
-                       new_question GET    /questions/new(.:format)                                                 questions#new
-                           question GET    /questions/:id(.:format)                                                 questions#show
-                                    DELETE /questions/:id(.:format)                                                 questions#destroy
-                   new_user_session GET    /users/sign_in(.:format)                                                 devise/sessions#new
-                       user_session POST   /users/sign_in(.:format)                                                 devise/sessions#create
-               destroy_user_session DELETE /users/sign_out(.:format)                                                devise/sessions#destroy
-                      user_password POST   /users/password(.:format)                                                devise/passwords#create
-                  new_user_password GET    /users/password/new(.:format)                                            devise/passwords#new
-                 edit_user_password GET    /users/password/edit(.:format)                                           devise/passwords#edit
-                                    PATCH  /users/password(.:format)                                                devise/passwords#update
-                                    PUT    /users/password(.:format)                                                devise/passwords#update
-           cancel_user_registration GET    /users/cancel(.:format)                                                  devise/registrations#cancel
-                  user_registration POST   /users(.:format)                                                         devise/registrations#create
-              new_user_registration GET    /users/sign_up(.:format)                                                 devise/registrations#new
-             edit_user_registration GET    /users/edit(.:format)                                                    devise/registrations#edit
-                                    PATCH  /users(.:format)                                                         devise/registrations#update
-                                    PUT    /users(.:format)                                                         devise/registrations#update
-                                    DELETE /users(.:format)                                                         devise/registrations#destroy
-                              users GET    /users(.:format)                                                         users#index
-                                    POST   /users(.:format)                                                         users#create
-                           new_user GET    /users/new(.:format)                                                     users#new
-                          edit_user GET    /users/:id/edit(.:format)                                                users#edit
-                               user GET    /users/:id(.:format)                                                     users#show
-                                    PATCH  /users/:id(.:format)                                                     users#update
-                                    PUT    /users/:id(.:format)                                                     users#update
-                                    DELETE /users/:id(.:format)                                                     users#destroy
-                               root GET    /                                                                        home#index
+                            Prefix Verb   URI Pattern                                                              Controller#Action
+                    user_questions GET    /user_questions(.:format)                                                questions#user_questions
+              makecomment_question POST   /questions/:id/makecomment(.:format)                                     questions#makecomment
+                     like_question PUT    /questions/:id/like(.:format)                                            questions#like
+                   unlike_question PUT    /questions/:id/unlike(.:format)                                          questions#unlike
+       makecomment_question_answer POST   /questions/:question_id/answers/:id/makecomment(.:format)                answers#makecomment
+              like_question_answer PUT    /questions/:question_id/answers/:id/like(.:format)                       answers#like
+            unlike_question_answer PUT    /questions/:question_id/answers/:id/unlike(.:format)                     answers#unlike
+          validate_question_answer PUT    /questions/:question_id/answers/:id/validate(.:format)                   answers#validate
+   question_answer_answer_comments POST   /questions/:question_id/answers/:answer_id/answer_comments(.:format)     answer_comments#create
+new_question_answer_answer_comment GET    /questions/:question_id/answers/:answer_id/answer_comments/new(.:format) answer_comments#new
+                  question_answers POST   /questions/:question_id/answers(.:format)                                answers#create
+               new_question_answer GET    /questions/:question_id/answers/new(.:format)                            answers#new
+        question_question_comments POST   /questions/:question_id/question_comments(.:format)                      question_comments#create
+     new_question_question_comment GET    /questions/:question_id/question_comments/new(.:format)                  question_comments#new
+                         questions GET    /questions(.:format)                                                     questions#index
+                                   POST   /questions(.:format)                                                     questions#create
+                      new_question GET    /questions/new(.:format)                                                 questions#new
+                          question GET    /questions/:id(.:format)                                                 questions#show
+                                   DELETE /questions/:id(.:format)                                                 questions#destroy
+                  new_user_session GET    /users/sign_in(.:format)                                                 devise/sessions#new
+                      user_session POST   /users/sign_in(.:format)                                                 devise/sessions#create
+              destroy_user_session DELETE /users/sign_out(.:format)                                                devise/sessions#destroy
+                     user_password POST   /users/password(.:format)                                                devise/passwords#create
+                 new_user_password GET    /users/password/new(.:format)                                            devise/passwords#new
+                edit_user_password GET    /users/password/edit(.:format)                                           devise/passwords#edit
+                                   PATCH  /users/password(.:format)                                                devise/passwords#update
+                                   PUT    /users/password(.:format)                                                devise/passwords#update
+          cancel_user_registration GET    /users/cancel(.:format)                                                  devise/registrations#cancel
+                 user_registration POST   /users(.:format)                                                         devise/registrations#create
+             new_user_registration GET    /users/sign_up(.:format)                                                 devise/registrations#new
+            edit_user_registration GET    /users/edit(.:format)                                                    devise/registrations#edit
+                                   PATCH  /users(.:format)                                                         devise/registrations#update
+                                   PUT    /users(.:format)                                                         devise/registrations#update
+                                   DELETE /users(.:format)                                                         devise/registrations#destroy
+                             users GET    /users(.:format)                                                         users#index
+                                   POST   /users(.:format)                                                         users#create
+                          new_user GET    /users/new(.:format)                                                     users#new
+                         edit_user GET    /users/:id/edit(.:format)                                                users#edit
+                              user GET    /users/:id(.:format)                                                     users#show
+                                   PATCH  /users/:id(.:format)                                                     users#update
+                                   PUT    /users/:id(.:format)                                                     users#update
+                                   DELETE /users/:id(.:format)                                                     users#destroy
+                              root GET    /                                                                        home#index

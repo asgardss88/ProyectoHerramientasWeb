@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<div class="row">
   <div class="navbar navbar-fixed-top navbar-inverse">
     <div class="navbar-inner">
       <div class="container">
@@ -23,8 +23,7 @@
                 <li><%= link_to "Questions", questions_path %></li>
                 <%unless current_user.admin%>
                 <li><%= link_to "Make a Question", new_question_path %></li>
-                <li><%= link_to "My Questions" %></li>
-                <li><%= link_to "My Answers" %></li>
+                <li><%= link_to "My Questions", user_questions_path %></li>
                 <%else%>
                   <li><%= link_to "Users", users_path %></li>
                 <%end%>
@@ -58,11 +57,12 @@
       </div>
     </div>
   </div>
+</div>
 <div class="container center">
 
   <div class="row">
-   <div class="span1 inline"></div> 
-  <div class="span10 inline">
+   <div class="span1"></div> 
+  <div class="span10">
 
 
 <% flash.each do |name, msg| %>
@@ -74,7 +74,7 @@
 <%= yield %> 
 </div>
 
-<div class="span1 inline"></div> 
+<div class="span1"></div> 
     
 </div>
 

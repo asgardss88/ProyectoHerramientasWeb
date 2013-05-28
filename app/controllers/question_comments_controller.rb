@@ -1,46 +1,35 @@
 class QuestionCommentsController < ApplicationController
-  before_action :set_question_comment, only: [:show, :edit, :update, :destroy]
+  before_action :set_question_comment, only: [:destroy]
+  before_filter :authenticate_user!, :only =>[:new, :create, :destroy]
 
-  # GET /question_comments
-  def index
-    @question_comments = QuestionComment.all
-  end
-
-  # GET /question_comments/1
-  def show
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, alert: exception.message
   end
 
   # GET /question_comments/new
   def new
+    authorize! :create, QuestionComment , message: "You don't have permission to comment this question"
     @question_comment = QuestionComment.new
+    @question_id = params[:question_id]
   end
 
-  # GET /question_comments/1/edit
-  def edit
-  end
 
   # POST /question_comments
   def create
+    authorize! :create, QuestionComment , message: "You don't have permission to comment this question"
     @question_comment = QuestionComment.new(question_comment_params)
-
+    @question_comment.user_id = current_user.id
+    @question_comment.question_id = params[:question_id]
     if @question_comment.save
-      redirect_to @question_comment, notice: 'Question comment was successfully created.'
+      redirect_to question_url(params[:question_id]), notice: 'Question comment was successfully created.'
     else
       render action: 'new'
     end
   end
 
-  # PATCH/PUT /question_comments/1
-  def update
-    if @question_comment.update(question_comment_params)
-      redirect_to @question_comment, notice: 'Question comment was successfully updated.'
-    else
-      render action: 'edit'
-    end
-  end
-
   # DELETE /question_comments/1
   def destroy
+    authorize! :create, QuestionComment , message: "You don't have permission to destroy comments"
     @question_comment.destroy
     redirect_to question_comments_url, notice: 'Question comment was successfully destroyed.'
   end

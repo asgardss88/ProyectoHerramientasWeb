@@ -13,7 +13,7 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= link_to user.email, user %></td>
-        <td><%= link_to raw('<i class="icon-pencil"></i>'), edit_user_registration_path(user), :class => "btn" %></td>
+        <td><%= link_to raw('<i class="icon-pencil"></i>'), edit_user_path(user), :class => "btn" %></td>
         <td><%= link_to raw('<i class="icon-trash"></i>'), user, :class => "btn", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

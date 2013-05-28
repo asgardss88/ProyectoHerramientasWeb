@@ -17,6 +17,7 @@ class QuestionsController < ApplicationController
   def show
     authorize! :read, Question, message: "You don't have permission to see the questions, please sign in"
     @answers = @question.answers
+    @comments = @question.question_comments
   end
 
   # GET /questions/new
@@ -34,6 +35,7 @@ class QuestionsController < ApplicationController
     authorize! :create, Question, message: "You don't have permission to create a question"
     @question = Question.new(question_params)
     @question.votes=0
+    @question.bonus= current_user.points/10
     @question.user_id = current_user.id 
 
     
@@ -88,6 +90,13 @@ class QuestionsController < ApplicationController
       redirect_to @question, alert: "Error saving the vote"
     end
   end
+
+  def user_questions
+    
+     @questions = Question.where("user_id = ?", current_user.id)
+  
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

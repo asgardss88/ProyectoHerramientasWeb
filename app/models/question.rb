@@ -1,6 +1,6 @@
 class Question < ActiveRecord::Base
 
-  attr_accessible :ask_for,:description, :bonus
+  attr_accessible :ask_for,:description
 
   validates :ask_for, :presence => true,
   						:length => {:minimum=> 5}

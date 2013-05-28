@@ -1,6 +1,7 @@
 Proyecto::Application.routes.draw do
 
-  
+  match "user_questions" => "questions#user_questions", via: :get
+
   resources :questions , :except => [:edit, :update]   do
 
     member do 
@@ -20,7 +21,7 @@ Proyecto::Application.routes.draw do
 
       resources :answer_comments, :only => [:new,:create,:delete]
     end  
-    resources :question_commnets, :only => [:new,:create,:delete]
+    resources :question_comments, :only => [:new,:create,:delete]
   end
 
   devise_for :users
