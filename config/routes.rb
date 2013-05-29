@@ -1,6 +1,7 @@
 Proyecto::Application.routes.draw do
 
   match "user_questions" => "questions#user_questions", via: :get
+  match "notification" => "users#notification", :via => :get
 
   resources :questions , :except => [:edit, :update]   do
 

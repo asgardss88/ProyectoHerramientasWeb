@@ -1,0 +1,27 @@
+<h1>Notification</h1>
+<br/>
+<%unless @notificaciones.empty?%>
+<table class="table table-bordered table-hover table-striped table-condensed">
+  <thead>
+    <tr>
+      <th>User</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @notificaciones.each do |notif| %>
+      <tr>
+        <td><%= link_to notif.user.email, user_path(notif.user)%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%else%>
+    No questions yet.
+<%end%>
+
+<br/>
+
+<div>
+<%= link_to 'Back', questions_path, :class =>"btn btn-primary" %>
+<div/>

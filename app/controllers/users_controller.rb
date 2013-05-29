@@ -52,6 +52,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def notification
+    user=current_user
+
+    @notificaciones=[]
+    c=Question.includes(:answers).where("created_at >= ?",user.last_sign_in_at)
+    question_list=c.where("user_id = ?", user.id)
+
+    question_list.each  do |qst|
+
+      @notificaciones.concat(qst.answers)
+
+    end
+
+
+  end
+
   # DELETE /users/1
   def destroy
     authorize! :destroy, User, message: "You dont have permission to do this action"
