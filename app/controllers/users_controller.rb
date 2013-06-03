@@ -55,13 +55,43 @@ class UsersController < ApplicationController
   def notification
     user=current_user
 
-    @notificaciones=[]
+    @notificaciones1=[]
     c=Question.includes(:answers).where("created_at >= ?",user.last_sign_in_at)
     question_list=c.where("user_id = ?", user.id)
 
     question_list.each  do |qst|
 
-      @notificaciones.concat(qst.answers)
+      @notificaciones1.concat(qst.answers)
+
+    end
+
+    @notificaciones2=[]
+    c=Question.includes(:question_comments).where("created_at >= ?",user.last_sign_in_at)
+    question_list=c.where("user_id = ?", user.id)
+
+    question_list.each do |qst|
+
+	@notificaciones2.concat(qst.question_comments)
+
+    end
+
+    @notificaciones3=[]
+    c=Question.includes(:vote_questions).where("created_at >= ?",user.last_sign_in_at)
+    question_list=c.where("user_id = ?", user.id)
+
+    question_list.each do |qst|
+
+	@notificaciones3.concat(qst.vote_questions)
+
+    end
+
+    @notificaciones4=[]
+    c=Question.includes(:question_comments).where("created_at >= ?",user.last_sign_in_at)
+    question_list=c.where("user_id = ?", user.id)
+
+    question_list.each do |qst|
+
+	@notificaciones4.concat(qst.vote_questions)
 
     end
 
