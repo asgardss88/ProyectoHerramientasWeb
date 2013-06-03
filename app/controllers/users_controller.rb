@@ -85,17 +85,6 @@ class UsersController < ApplicationController
 
     end
 
-    @notificaciones4=[]
-    c=Question.includes(:question_comments).where("created_at >= ?",user.last_sign_in_at)
-    question_list=c.where("user_id = ?", user.id)
-
-    question_list.each do |qst|
-
-	@notificaciones4.concat(qst.vote_questions)
-
-    end
-
-
   end
 
   # DELETE /users/1
