@@ -14,7 +14,14 @@
     <% @notificaciones1.each do |notif| %>
       <tr>
         <td><%= link_to notif.user.email, user_path(notif.user)%></td>
+        
+        
       </tr>
+      <tr>
+        <%quest=notif.question%>
+        <td><%= link_to truncate(quest.ask_for,:length=>40), quest %></td>
+      </tr>
+    </br>
     <% end %>
   </tbody>
 </table>
@@ -34,6 +41,10 @@
     <% @notificaciones2.each do |notif| %>
       <tr>
         <td><%= link_to notif.user.email, user_path(notif.user)%></td>
+      </tr>
+      <tr>
+        <%quest=notif.question%>
+        <td><%= link_to truncate(quest.ask_for,:length=>40), quest %></td>
       </tr>
     <% end %>
   </tbody>
@@ -55,6 +66,10 @@
       <tr>
         <td><%= link_to notif.user.email, user_path(notif.user)%></td>
       </tr>
+      <tr>
+        <%quest=notif.question%>
+        <td><%= link_to truncate(quest.ask_for,:length=>40), quest %></td>
+      </tr>
     <% end %>
   </tbody>
 </table>
@@ -64,7 +79,7 @@
 
 <%if @empty==0%>
     No notifications yet.
-    <br>
+    <br/>
 <%end%>
 
 <br/>

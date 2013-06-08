@@ -32,6 +32,7 @@ class AnswersController < ApplicationController
     @answer.user_id=current_user.id
 
     if @answer.save
+      NotificationMailer.answer_notification(current_user,Question.find(params[:question_id])).deliver
       redirect_to question_url(params[:question_id]), notice: 'Answer was successfully created.'
     else
       render action: 'new'

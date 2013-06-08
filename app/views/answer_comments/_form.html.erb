@@ -1,15 +1,20 @@
-<%= form_for(@answer_comment) do |f| %>
+<%= form_for(@answer_comment, url: question_answer_answer_comments_path(@question_id, @answer_id), method: :post) do |f| %>
   <% if @answer_comment.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@answer_comment.errors.count, "error") %> prohibited this answer_comment from being saved:</h2>
-
+      <% emsg=pluralize(@answer_comment.errors.count, "error")+" prohibited this comment from being saved:"%>
+      <%= content_tag :div, emsg, :class => "alert alert-error" %>
       <ul>
       <% @answer_comment.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+      <%= content_tag :div, msg, :class => "alert alert-error" %>
       <% end %>
       </ul>
     </div>
   <% end %>
+
+  <div class="field">
+    <%=f.label :content%>
+    <%=f.text_area :content, :size=> 100%>
+  </div>
 
   <div class="actions">
     <%= f.submit %>

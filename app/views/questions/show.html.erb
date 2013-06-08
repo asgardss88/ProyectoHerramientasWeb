@@ -4,25 +4,28 @@
 	
 		<tr>
 			<td>
-				<h5><%=@question.ask_for%></h5>
+				<h3><%=@question.ask_for%></h3>
 				<div class="well">
 					<%= @question.description%>
 				</div>
 
 			<td>
 		</tr>
-		<tr>
-			<td>Votes:<%= @question.votes%></td><br/>
-		</tr>
+	
 		<tr>
 		    <td>Asked by <%= link_to @question.user.email, user_path(@question.user_id)%></td>
-		    <td>at <%= @question.created_at%></td>
+		    <td>at <%= l @question.created_at , format: :short%></td>
 		</tr>
 		<tr>
+			<br/><br/>
 			<td>Poits for a correct answer:<%=@question.bonus+1%></td>
 		</tr>
 		<br/>
 
+		<tr>
+			<td><h5>Votes:<%= @question.votes%></h5></td><br/>
+		</tr>
+		<br/>
 
 		<div class="accordion" id="accordion1">
 			<div class="accordion-group">
@@ -39,7 +42,7 @@
 					  <div class="accordion-group">
 					    <div class="accordion-heading">
 					      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#<%="collapse"+contador.to_s%>">
-					       Comment by: <%=link_to com.user.email, user_path(com.user_id) %> at <%=com.created_at%> 
+					       Comment by: <%=link_to com.user.email, user_path(com.user_id) %> at <%=l com.created_at , format: :short%> 
 					      </a>
 					    </div>
 					    <div id="<%="collapse"+contador.to_s%>" class="accordion-body collapse">
@@ -92,13 +95,13 @@
 				<tr class=<%=clase%>>
 					<td>Content:       &nbsp;&nbsp;&nbsp;&nbsp;         </td>
 					<td><%=ans.content%></td>
-					<td></td>
+					<td><%=link_to "comment", new_question_answer_answer_comment_path(@question,ans), :class =>"btn" %></td>
 					<td></td>
 					<td><%= link_to(raw('<i class="icon-thumbs-up"></i>'), like_question_answer_path(@question,ans), :class => "btn", :method => :put) unless ans.user_id == current_user.id %></td>
 				</tr>
 				<tr class=<%=clase%>>
 					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Created at:    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-					<td><%=ans.created_at%></td>
+					<td><%=l ans.created_at, format: :short%></td>
 					<td></td>
 					<td></td>
 					<td><%= link_to(raw('<i class="icon-thumbs-down"></i>'), unlike_question_answer_path(@question,ans), :class => "btn", :method => :put) unless ans.user_id == current_user.id%>

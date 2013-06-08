@@ -2,6 +2,7 @@ Proyecto::Application.routes.draw do
 
   match "user_questions" => "questions#user_questions", via: :get
   match "notification" => "users#notification", :via => :get
+  match "users/sign_out" => "users#sign_out", :via => :put, as: :sign_out
 
   resources :questions , :except => [:edit, :update]   do
 
@@ -26,7 +27,7 @@ Proyecto::Application.routes.draw do
   end
 
   devise_for :users
-  resources :users
+  resources :users 
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

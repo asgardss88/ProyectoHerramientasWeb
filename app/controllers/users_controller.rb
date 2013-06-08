@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_filter :set_user, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, only: [:index,:show,:edit,:destroy,:update]
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -41,9 +41,9 @@ class UsersController < ApplicationController
   def update
     authorize! :update, User, message: "You don't have permission to do this action"
 
-    #if !current_user.admin and current_user.id != user_params[:id]
-     #  redirect_to questions_path, alert: "You don̈́'t have permission to edit other user"
-    #end 
+   # if (current_user.id != user_params[:id])
+   #    redirect_to questions_url, alert: "You don̈́'t have permission to edit other user"
+   # end 
 
     if @user.update(user_params)
       redirect_to @user, notice: 'User was successfully updated.'
@@ -84,6 +84,12 @@ class UsersController < ApplicationController
 	@notificaciones3.concat(qst.vote_questions)
 
     end
+
+  end
+
+  def sign_out
+
+    redirect_to destroy_user_session_path, method: :delete
 
   end
 

@@ -13,7 +13,7 @@
     <% @questions.each do |question| %>
       <tr>
         <td><%= link_to truncate(question.ask_for,:length=>40), question %></td>
-        <td><%=question.created_at%></td>
+        <td><%=l question.created_at, format: :short%></td>
       </tr>
     <% end %>
   </tbody>

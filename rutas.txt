@@ -1,6 +1,7 @@
                             Prefix Verb   URI Pattern                                                              Controller#Action
                     user_questions GET    /user_questions(.:format)                                                questions#user_questions
                       notification GET    /notification(.:format)                                                  users#notification
+                          sign_out PUT    /users/:id/sign_out(.:format)                                            users#sign_out
               makecomment_question POST   /questions/:id/makecomment(.:format)                                     questions#makecomment
                      like_question PUT    /questions/:id/like(.:format)                                            questions#like
                    unlike_question PUT    /questions/:id/unlike(.:format)                                          questions#unlike
