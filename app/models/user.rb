@@ -4,14 +4,14 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :questions
-  has_many :answers
-  has_many :vote_answers
-  has_many :vote_questions
-  has_many :voted_answers, :class_name => "Answer", :through => :vote_answers, :source => :answer
-  has_many :voted_questions, :class_name => "Question", :through => :vote_questions, :source => :user
-  has_many :answer_comments
-  has_many :question_comments
+  has_many :questions, dependent: :destroy
+  has_many :answers, dependent: :destroy
+  has_many :vote_answers, dependent: :destroy
+  has_many :vote_questions, dependent: :destroy
+  has_many :voted_answers, :dependent => :destroy, :class_name => "Answer", :through => :vote_answers, :source => :answer
+  has_many :voted_questions, :dependent => :destroy, :class_name => "Question", :through => :vote_questions, :source => :user
+  has_many :answer_comments, dependent: :destroy
+  has_many :question_comments, dependent: :destroy
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :admin, :points

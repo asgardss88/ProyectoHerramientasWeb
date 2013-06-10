@@ -21,6 +21,7 @@ class QuestionCommentsController < ApplicationController
     @question_comment.user_id = current_user.id
     @question_comment.question_id = params[:question_id]
     if @question_comment.save
+      NotificationMailer.comment_question_notification(current_user,@question_comment.question).deliver
       redirect_to question_url(params[:question_id]), notice: 'Question comment was successfully created.'
     else
       render action: 'new'

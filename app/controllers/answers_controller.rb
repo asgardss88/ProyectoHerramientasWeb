@@ -49,6 +49,7 @@ class AnswersController < ApplicationController
   def like
     @answer.votes+=1
     if @answer.save
+      NotificationMailer.vote_answer_notification(@answer).deliver
       redirect_to @answer.question, notice: "Vote saved successfully"
     else
       redirect_to @answer.question, alert: "Error saving the vote"
@@ -60,6 +61,7 @@ class AnswersController < ApplicationController
     @answer.votes-=1
     
     if @answer.save
+      NotificationMailer.vote_answer_notification(@answer).deliver
       redirect_to @answer.question, notice: "Vote saved successfully"
     else
       redirect_to @answer.question, alert: "Error saving the vote"
@@ -76,6 +78,8 @@ class AnswersController < ApplicationController
       user.save
       answer.state=true
       answer.save
+
+      NotificationMailer.validate_answer_notification(current_user,user,@question).deliver
 
       redirect_to @question, notice: "Validated successfully"
     else

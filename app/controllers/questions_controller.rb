@@ -74,6 +74,7 @@ class QuestionsController < ApplicationController
 
     @question.votes+=1
     if @question.save
+      NotificationMailer.vote_question_notification(@question).deliver
       redirect_to @question, notice: "Vote saved successfully"
     else
       redirect_to @question, alert: "Error saving the vote"
@@ -85,6 +86,7 @@ class QuestionsController < ApplicationController
   def unlike
     @question.votes-=1
     if @question.save
+      NotificationMailer.vote_question_notification(@question).deliver
       redirect_to @question, notice: "Vote saved successfully"
     else
       redirect_to @question, alert: "Error saving the vote"
