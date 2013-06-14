@@ -6,12 +6,14 @@ class Ability
 
     if user.admin
         can [:list,:read,:update,:destroy], User
-        can [:list,:read, :destroy], Question
+        can [:list,:read], Question
         can [:read,:destroy], AnswerComment 
-        can [:read,:destroy], QuestionComment 
+        can [:read,:destroy], QuestionComment
+        can [:create,:list,:edit,:destroy], Tag 
     else
         can [:read, :update], User
-        can [:list,:create,:read,:comment,:vote], Question
+        can [:list], Tag 
+        can [:list,:create,:read,:comment,:vote,:search,:read_own], Question
         can [:read,:create,:comment,:vote,:validate], Answer
         can [:read,:create,], AnswerComment 
         can [:read,:create], QuestionComment 

@@ -1,20 +1,39 @@
 <h1>Listing tags</h1>
+<br/>
 
-<table>
+<%if @tags.empty?%>
+
+  No tags yet.
+</br>
+<%else%>
+
+<table class="table table-bordered table-hover table-striped">
   <thead>
     <tr>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Title</th>
+      <th>Description</th>
+       <%if current_user.admin%>
+        <th>Edit</th>
+        <th>Delete</th>
+
+      <%else%>
+        <th>Search</th>
+      <%end%>
     </tr>
   </thead>
 
   <tbody>
     <% @tags.each do |tag| %>
       <tr>
-        <td><%= link_to 'Show', tag %></td>
-        <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
-        <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= tag.title %></td>
+        <td><%= tag.description %></td>
+        <%if current_user.admin%>
+        <td><%= link_to raw('<i class="icon-pencil"></i>'), edit_tag_path(tag), :class => "btn" %></td>
+        <td><%= link_to raw('<i class="icon-trash"></i>'), tag, :class => "btn", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%else%>
+          <td><%= link_to raw('<i class="icon-search"></i>'), search_by_tag_path(tag.id), :class => "btn" %></td>
+        <%end%>
+
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +41,8 @@
 
 <br>
 
-<%= link_to 'New Tag', new_tag_path %>
+<%end%>
+<%if current_user.admin%>
+  <%= link_to 'New Tag', new_tag_path, :class =>"btn btn-primary" %>
+<%end%>
+

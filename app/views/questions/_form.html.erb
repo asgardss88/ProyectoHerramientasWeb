@@ -21,6 +21,11 @@
 		<%=f.text_area :description, :size=> 100%>
 	</div>
 
+  <div class="select">
+    <%=f.label :tag%>
+    <%=f.select :tag_id, @options%>
+  </div>
+
   
   <div class="actions">
     <%= f.submit  :class => "btn btn-primary"%>

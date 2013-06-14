@@ -1,17 +1,25 @@
 <%= form_for(@tag) do |f| %>
   <% if @tag.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
-
+      <% emsg=pluralize(@tag.errors.count, "error")+" prohibited this tag from being saved:"%>
+      <%= content_tag :div, emsg, :class => "alert alert-error" %>
       <ul>
       <% @tag.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+      <%= content_tag :div, msg, :class => "alert alert-error" %>
       <% end %>
       </ul>
     </div>
   <% end %>
 
+  <div class="field">
+    <%=f.label :title%>
+    <%=f.text_field :title, :size=> 100%>
+  </div>
+  <div class="field">
+    <%=f.label :description%>
+    <%=f.text_area :description, :size=> 100%>
+  </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => "btn btn-primary" %>
   </div>
 <% end %>

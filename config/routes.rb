@@ -3,6 +3,7 @@ Proyecto::Application.routes.draw do
   match "user_questions" => "questions#user_questions", via: :get
   match "notification" => "users#notification", :via => :get
   match "users/sign_out" => "users#sign_out", :via => :put, as: :sign_out
+  match "tag_search/:tag_id" => "questions#search_by_tag", via: :get, as: :search_by_tag
 
   resources :questions , :except => [:edit, :update]   do
 
@@ -28,6 +29,7 @@ Proyecto::Application.routes.draw do
 
   devise_for :users
   resources :users 
+  resources :tags, :except => [:show] 
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

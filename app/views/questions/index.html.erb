@@ -32,6 +32,8 @@
 
 <br/>
 
-<div>
-<%= link_to 'Make a Question!', new_question_path, :class =>"btn btn-primary" %>
-<div/>
+<%if !current_user.admin%>
+  <div>
+  <%= link_to 'Make a Question!', new_question_path, :class =>"btn btn-primary" %>
+  <div/>
+<%end%>

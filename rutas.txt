@@ -1,7 +1,7 @@
                             Prefix Verb   URI Pattern                                                              Controller#Action
                     user_questions GET    /user_questions(.:format)                                                questions#user_questions
                       notification GET    /notification(.:format)                                                  users#notification
-                          sign_out PUT    /users/:id/sign_out(.:format)                                            users#sign_out
+                          sign_out PUT    /users/sign_out(.:format)                                                users#sign_out
               makecomment_question POST   /questions/:id/makecomment(.:format)                                     questions#makecomment
                      like_question PUT    /questions/:id/like(.:format)                                            questions#like
                    unlike_question PUT    /questions/:id/unlike(.:format)                                          questions#unlike
@@ -43,4 +43,12 @@ new_question_answer_answer_comment GET    /questions/:question_id/answers/:answe
                                    PATCH  /users/:id(.:format)                                                     users#update
                                    PUT    /users/:id(.:format)                                                     users#update
                                    DELETE /users/:id(.:format)                                                     users#destroy
+                              tags GET    /tags(.:format)                                                          tags#index
+                                   POST   /tags(.:format)                                                          tags#create
+                           new_tag GET    /tags/new(.:format)                                                      tags#new
+                          edit_tag GET    /tags/:id/edit(.:format)                                                 tags#edit
+                               tag GET    /tags/:id(.:format)                                                      tags#show
+                                   PATCH  /tags/:id(.:format)                                                      tags#update
+                                   PUT    /tags/:id(.:format)                                                      tags#update
+                                   DELETE /tags/:id(.:format)                                                      tags#destroy
                               root GET    /                                                                        home#index

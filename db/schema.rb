@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130522020209) do
+ActiveRecord::Schema.define(version: 20130614132619) do
 
   create_table "answer_comments", force: true do |t|
     t.integer  "user_id"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20130522020209) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "ask_for"
+    t.integer  "tag_id"
   end
 
   add_index "questions", ["user_id"], name: "index_questions_on_user_id"

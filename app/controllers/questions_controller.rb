@@ -17,12 +17,14 @@ class QuestionsController < ApplicationController
   def show
     authorize! :read, Question, message: "You don't have permission to see the questions, please sign in"
     @answers = @question.answers
+    @tag = @question.tag
     @comments = @question.question_comments
   end
 
   # GET /questions/new
   def new
     authorize! :create, Question, message: "You don't have permission to make a question"
+    @options = Tag.all.map {|t| [t.title,t.id]}
     @question = Question.new
   end
 
@@ -94,9 +96,16 @@ class QuestionsController < ApplicationController
   end
 
   def user_questions
-    
+     authorize! :read_own, Question, message: "You don't have permission search questions"
      @questions = Question.where("user_id = ?", current_user.id)
   
+  end
+
+  def search_by_tag
+    authorize! :search, Question, message: "You don't have permission search questions by tag"
+    @questions = Question.where("tag_id = ?", params[:tag_id])
+    @tag = Tag.find(params[:tag_id])
+
   end
 
 
